@@ -20,7 +20,7 @@ class TaskViewHolder(
         if (task.completed) {
             binding.tvTitle.setBackgroundResource(R.color.green_700)
         } else {
-            binding.tvTitle.setBackgroundResource(R.color.blue_700)
+            binding.tvTitle.setBackgroundResource(R.color.purple_700)
         }
 
         binding.tvDate.text = task.date?.let {
