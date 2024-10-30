@@ -89,7 +89,7 @@ class TaskFormActivity : AppCompatActivity() {
             val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
             LocalDate.parse(dateString, dateFormatter)
         } catch (e: DateTimeParseException) {
-            println("Invalid date format. Expected format: yyyy/MM/dd")
+            println("Invalid date format. Expected format: dd/MM/yyyy")
             null
         }
     }
@@ -104,13 +104,18 @@ class TaskFormActivity : AppCompatActivity() {
         }
     }
 
+    fun formatLocalDateToString(date: LocalDate?): String? {
+        val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+        return date?.format(dateFormatter)
+    }
+
     @Suppress("deprecation")
     private fun setValues() {
         (intent.extras?.getSerializable("task") as Task?)?.let { task ->
             taskId = task.id
             binding.etTitle.setText(task.title)
             binding.etDescription.setText(task.description)
-            binding.etDate.setText(task.date.toString())
+            binding.etDate.setText(formatLocalDateToString(task.date))
             binding.etTime.setText(task.time.toString())
 
             if (task.completed) {
