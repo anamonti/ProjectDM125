@@ -65,18 +65,19 @@ class TaskFormActivity : AppCompatActivity() {
 
     private fun validateTaskFields(): Boolean {
         if (binding.etTitle.text.toString().isEmpty()) {
-            binding.etTitle.setError("This field is required")
+            binding.etTitle.error = "This field is required"
             return false
         }
 
-        val datePattern = Regex("\\d{4}-\\d{2}-\\d{2}")
+        val datePattern = Regex("\\d{2}/\\d{2}/\\d{4}")
         if (!datePattern.matches(binding.etDate.text.toString())) {
-            binding.etDate.setError("Date format should be yyyy-MM-dd")
+            binding.etDate.error = "Date format should be dd/MM/yyyy"
+            return false
         }
 
         val timePattern = Regex("\\d{2}:\\d{2}")
         if (!timePattern.matches(binding.etTime.text.toString())) {
-            println("Time format should be HH:mm")
+            binding.etTime.error = "Time format should be HH:mm"
             return false
         }
 
@@ -85,10 +86,10 @@ class TaskFormActivity : AppCompatActivity() {
 
     fun convertToLocalDate(dateString: String): LocalDate? {
         return try {
-            val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
             LocalDate.parse(dateString, dateFormatter)
         } catch (e: DateTimeParseException) {
-            println("Invalid date format. Expected format: yyyy-MM-dd")
+            println("Invalid date format. Expected format: yyyy/MM/dd")
             null
         }
     }
@@ -108,6 +109,9 @@ class TaskFormActivity : AppCompatActivity() {
         (intent.extras?.getSerializable("task") as Task?)?.let { task ->
             taskId = task.id
             binding.etTitle.setText(task.title)
+            binding.etDescription.setText(task.description)
+            binding.etDate.setText(task.date.toString())
+            binding.etTime.setText(task.time.toString())
 
             if (task.completed) {
                 binding.btSave.visibility = View.INVISIBLE
