@@ -8,6 +8,9 @@
     <color name="green_700">#388E3C</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="blue">#303F9F</color>
+    <color name="red">#D32F2F</color>
+    <color name="yellow">#FBC02D</color>
 
     <color name="ic_launcher_background">#8433D1</color>
 </resources>

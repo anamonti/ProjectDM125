@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.anajulia.mytasks.databinding.ActivityTaskFormBinding
 import com.anajulia.mytasks.entity.Task
 import com.anajulia.mytasks.service.TaskService
+import com.anajulia.mytasks.utils.Utils
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -49,8 +50,8 @@ class TaskFormActivity : AppCompatActivity() {
                     id = taskId,
                     title = binding.etTitle.text.toString(),
                     description = binding.etDescription.text.toString(),
-                    date = convertToLocalDate(binding.etDate.text.toString()),
-                    time = convertToLocalTime(binding.etTime.text.toString()))
+                    date = Utils.convertToLocalDate(binding.etDate.text.toString()),
+                    time = Utils.convertToLocalTime(binding.etTime.text.toString()))
 
                 taskService.save(task).observe(this) { responseDto ->
                     if (responseDto.isError) {
@@ -84,30 +85,7 @@ class TaskFormActivity : AppCompatActivity() {
         return true
     }
 
-    fun convertToLocalDate(dateString: String): LocalDate? {
-        return try {
-            val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-            LocalDate.parse(dateString, dateFormatter)
-        } catch (e: DateTimeParseException) {
-            println("Invalid date format. Expected format: dd/MM/yyyy")
-            null
-        }
-    }
 
-    fun convertToLocalTime(timeString: String): LocalTime? {
-        return try {
-            val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
-            LocalTime.parse(timeString, timeFormatter)
-        } catch (e: DateTimeParseException) {
-            println("Invalid time format. Expected format: HH:mm")
-            null
-        }
-    }
-
-    fun formatLocalDateToString(date: LocalDate?): String? {
-        val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-        return date?.format(dateFormatter)
-    }
 
     @Suppress("deprecation")
     private fun setValues() {
@@ -115,7 +93,7 @@ class TaskFormActivity : AppCompatActivity() {
             taskId = task.id
             binding.etTitle.setText(task.title)
             binding.etDescription.setText(task.description)
-            binding.etDate.setText(formatLocalDateToString(task.date))
+            binding.etDate.setText(Utils.formatLocalDateToString(task.date))
             binding.etTime.setText(task.time.toString())
 
             if (task.completed) {

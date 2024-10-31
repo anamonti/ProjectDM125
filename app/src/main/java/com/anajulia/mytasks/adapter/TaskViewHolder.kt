@@ -7,6 +7,8 @@ import com.anajulia.mytasks.R
 import com.anajulia.mytasks.databinding.TaskListItemBinding
 import com.anajulia.mytasks.entity.Task
 import com.anajulia.mytasks.listener.TaskItemClickListener
+import com.anajulia.mytasks.utils.Utils
+import java.time.LocalDate
 
 class TaskViewHolder(
     private val context: Context,
@@ -18,13 +20,31 @@ class TaskViewHolder(
         binding.tvTitle.text = task.title
 
         if (task.completed) {
-            binding.tvTitle.setBackgroundResource(R.color.green_700)
+            binding.colorView.setBackgroundResource(R.color.green_700)
         } else {
-            binding.tvTitle.setBackgroundResource(R.color.purple_700)
+            binding.colorView.setBackgroundResource(R.color.purple_700)
+        }
+
+        task.date?.let { date ->
+            if (date.isAfter(LocalDate.now())) {
+                binding.colorView.setBackgroundResource(R.color.blue)
+            } else if (date.isBefore(LocalDate.now().minusDays(1))) {
+                binding.colorView.setBackgroundResource(R.color.red)
+            } else if (date.isEqual(LocalDate.now())) {
+                binding.colorView.setBackgroundResource(R.color.yellow)
+            }
+        } ?: run {
+            binding.colorView.setBackgroundResource(R.color.blue)
         }
 
         binding.tvDate.text = task.date?.let {
-            task.date.toString()
+            Utils.formatLocalDateToString(task.date)
+        } ?: run {
+            "-"
+        }
+
+        binding.tvTime.text = task.time?.let {
+            task.time.toString()
         } ?: run {
             "-"
         }
