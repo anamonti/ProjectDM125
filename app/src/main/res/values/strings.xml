@@ -17,6 +17,7 @@
     <string name="password">Senha</string>
     <string name="login">Login</string>
     <string name="create_account">Criar conta</string>
+    <string name="send_link">Enviar link por e-mail</string>
     <string name="logout">Sair</string>
     <string name="mark_as_completed">Marcar como concluída</string>
     <string name="empty_tasks">Não existe nenhuma tarefa cadastrada.\n\nQue tal que criar uma nova tarefa?</string>
@@ -24,5 +25,8 @@
     <string name="new_task_information">Cria uma nova tarefa</string>
     <string name="share">Compartilhar</string>
     <string name="share_using">Compartilhar a tarefa com...</string>
+    <string name="delete_task_confirmation">Deseja mesmo excluir essa tarefa?</string>
+    <string name="yes">Sim</string>
+    <string name="cancel">Cancelar</string>
 
 </resources>

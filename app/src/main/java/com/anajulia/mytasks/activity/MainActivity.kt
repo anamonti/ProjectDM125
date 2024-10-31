@@ -27,6 +27,7 @@ import com.anajulia.mytasks.helper.NotificationHelper
 import com.anajulia.mytasks.listener.TaskItemClickListener
 import com.anajulia.mytasks.listener.TaskItemSwipeListener
 import com.anajulia.mytasks.service.TaskService
+import com.anajulia.mytasks.utils.Utils
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -57,7 +58,6 @@ class MainActivity : AppCompatActivity() {
         savedInstanceState?.let { state ->
             state.keySet().forEach { key -> Log.e("state", key) }
         }
-
         val helper = NotificationHelper(this)
 //        helper.showNotification("Titulo da notificação 1", "Texto da notificação")
     }
@@ -164,14 +164,23 @@ class MainActivity : AppCompatActivity() {
 
         ItemTouchHelper(TaskItemTouchCallback(object : TaskItemSwipeListener {
             override fun onSwipe(position: Int) {
-                val task = tasksAdapter.getItem(position)
-                taskService.delete(task).observe(this@MainActivity) { responseDto ->
-                    if (responseDto.isError) {
+                AlertDialog.Builder(this@MainActivity)
+                    .setMessage(R.string.delete_task_confirmation)
+                    .setPositiveButton(
+                        R.string.yes
+                    ) { _, _ ->
+                        val task = tasksAdapter.getItem(position)
+                        taskService.delete(task).observe(this@MainActivity) { responseDto ->
+                            if (responseDto.isError) {
+                                tasksAdapter.refreshItem(position)
+                            } else {
+                                tasksAdapter.deleteItem(position)
+                            }
+                        }
+                    }.setNegativeButton(R.string.cancel) { _, _ ->
                         tasksAdapter.refreshItem(position)
-                    } else {
-                        tasksAdapter.deleteItem(position)
                     }
-                }
+                    .show()
             }
         })).attachToRecyclerView(binding.rvTasks)
 
