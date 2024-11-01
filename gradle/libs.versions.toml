@@ -14,6 +14,7 @@ logging-interceptor = "4.5.0"
 lifecycle-viewmodel-ktx = "2.8.6"
 google-services = "4.4.2"
 firebase-bom = "33.3.0"
+play-services-auth = "21.2.0"
 preference-ktx = "1.2.1"
 swipe-refresh-layout = "1.1.0"
 
@@ -31,6 +32,7 @@ converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", ve
 logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "logging-interceptor" }
 lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle-viewmodel-ktx" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
+play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "play-services-auth" }
 firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx" }
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx" }
 preference-ktx = { group = "androidx.preference", name = "preference-ktx", version.ref = "preference-ktx" }

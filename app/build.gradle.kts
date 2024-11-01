@@ -57,4 +57,5 @@ dependencies {
     implementation(libs.preference.ktx)
     implementation(libs.swipe.refresh.layout)
     implementation(libs.firebase.auth.ktx)
+    implementation(libs.play.services.auth)
 }

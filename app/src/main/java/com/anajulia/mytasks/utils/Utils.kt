@@ -1,5 +1,7 @@
 package com.anajulia.mytasks.utils
 
+import android.content.Context
+import android.content.SharedPreferences
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -29,5 +31,17 @@ object Utils {
             println("Invalid time format. Expected format: HH:mm")
             null
         }
+    }
+
+    fun saveEmail(context: Context, email: String) {
+        val sharedPreferences: SharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("user_email", email)
+        editor.apply()
+    }
+
+    fun getEmail(context: Context): String? {
+        val sharedPreferences: SharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        return sharedPreferences.getString("user_email", null)
     }
 }

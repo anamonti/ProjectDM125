@@ -17,7 +17,8 @@
     <string name="password">Senha</string>
     <string name="login">Login</string>
     <string name="create_account">Criar conta</string>
-    <string name="send_link">Enviar link por e-mail</string>
+    <string name="send_link">Fazer login com conta do Google</string>
+    <string name="or">OU</string>
     <string name="logout">Sair</string>
     <string name="mark_as_completed">Marcar como concluída</string>
     <string name="empty_tasks">Não existe nenhuma tarefa cadastrada.\n\nQue tal que criar uma nova tarefa?</string>
