@@ -29,5 +29,9 @@
     <string name="delete_task_confirmation">Deseja mesmo excluir essa tarefa?</string>
     <string name="yes">Sim</string>
     <string name="cancel">Cancelar</string>
-
+    <string name="date_format">Formato da data</string>
+    <string name="standard_format_title">DD/MM/YYYY</string>
+    <string name="standard_format_summary">Formato padrão</string>
+    <string name="full_format_title">01 de janeiro de 2021</string>
+    <string name="full_format_summary">Formato extenso</string>
 </resources>

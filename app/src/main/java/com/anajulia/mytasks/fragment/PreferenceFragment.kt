@@ -2,6 +2,8 @@ package com.anajulia.mytasks.fragment
 
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.preference.CheckBoxPreference
 import androidx.preference.Preference.OnPreferenceChangeListener
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
@@ -32,5 +34,21 @@ class PreferenceFragment : PreferenceFragmentCompat() {
 
                 true
             }
+
+        val keys = listOf(
+            "date_format_standard",
+            "date_format_long"
+        )
+
+        keys.forEach { key ->
+            findPreference<CheckBoxPreference>(key)?.setOnPreferenceChangeListener { preference, newValue ->
+                if (newValue as Boolean) {
+                    keys.filter { it != preference.key }.forEach { otherKey ->
+                        findPreference<CheckBoxPreference>(otherKey)?.isChecked = false
+                    }
+                }
+                true
+            }
+        }
     }
 }

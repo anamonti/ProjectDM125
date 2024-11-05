@@ -6,11 +6,17 @@ import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
+import java.util.Locale
 
 object Utils {
-    fun formatLocalDateToString(date: LocalDate?): String? {
+    fun formatLocalDateToStandard(date: LocalDate): String {
         val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-        return date?.format(dateFormatter)
+        return date.format(dateFormatter)
+    }
+
+    fun formatLocalDateToFull(date: LocalDate): String {
+        val dateFormatter = DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy", Locale("pt", "BR"))
+        return date.format(dateFormatter)
     }
 
     fun convertToLocalDate(dateString: String): LocalDate? {

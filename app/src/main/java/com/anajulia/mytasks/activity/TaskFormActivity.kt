@@ -93,7 +93,7 @@ class TaskFormActivity : AppCompatActivity() {
             taskId = task.id
             binding.etTitle.setText(task.title)
             binding.etDescription.setText(task.description)
-            binding.etDate.setText(Utils.formatLocalDateToString(task.date))
+            binding.etDate.setText(Utils.formatLocalDateToStandard(task.date!!))
             binding.etTime.setText(task.time.toString())
 
             if (task.completed) {

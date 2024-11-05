@@ -11,4 +11,21 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:title="@string/date_format"
+        android:key="date_format">
+
+        <CheckBoxPreference
+            android:key="date_format_standard"
+            android:title="@string/standard_format_title"
+            android:summary="@string/standard_format_summary"
+            android:defaultValue="true" />
+
+        <CheckBoxPreference
+            android:key="date_format_long"
+            android:title="@string/full_format_title"
+            android:summary="@string/full_format_summary" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

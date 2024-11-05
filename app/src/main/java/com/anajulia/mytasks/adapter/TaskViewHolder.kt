@@ -1,7 +1,9 @@
 package com.anajulia.mytasks.adapter
 
 import android.content.Context
+import android.util.Log
 import androidx.core.content.ContextCompat
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anajulia.mytasks.R
 import com.anajulia.mytasks.databinding.TaskListItemBinding
@@ -38,7 +40,7 @@ class TaskViewHolder(
         }
 
         binding.tvDate.text = task.date?.let {
-            Utils.formatLocalDateToString(task.date)
+            checkDateFormat(task.date!!)
         } ?: run {
             "-"
         }
@@ -62,6 +64,22 @@ class TaskViewHolder(
                 listener.onShareClick(task)
                 true
             }
+        }
+    }
+
+    fun checkDateFormat(date: LocalDate): String {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val selectedFormat = listOf(
+            "date_format_standard",
+            "date_format_long"
+        ).find { key ->
+            sharedPreferences.getBoolean(key, false)
+        }
+
+        return if (selectedFormat.equals("date_format_standard")) {
+            Utils.formatLocalDateToStandard(date)
+        } else {
+            Utils.formatLocalDateToFull(date)
         }
     }
 }
