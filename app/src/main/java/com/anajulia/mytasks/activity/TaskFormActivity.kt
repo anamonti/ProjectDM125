@@ -91,10 +91,20 @@ class TaskFormActivity : AppCompatActivity() {
     private fun setValues() {
         (intent.extras?.getSerializable("task") as Task?)?.let { task ->
             taskId = task.id
-            binding.etTitle.setText(task.title)
-            binding.etDescription.setText(task.description)
-            binding.etDate.setText(Utils.formatLocalDateToStandard(task.date!!))
-            binding.etTime.setText(task.time.toString())
+            task.id?.let {
+                taskService.readTaskById(it).observe(this) { responseDto ->
+                    if (responseDto.isError) {
+                        Toast.makeText(this, "Erro com o servidor", Toast.LENGTH_SHORT).show()
+                    } else {
+                        responseDto.value?.let { value ->
+                            binding.etTitle.setText(value.title)
+                            binding.etDescription.setText(value.description)
+                            binding.etDate.setText(Utils.formatLocalDateToStandard(value.date!!))
+                            binding.etTime.setText(value.time.toString())
+                        }
+                    }
+                }
+            }
 
             if (task.completed) {
                 binding.btSave.visibility = View.INVISIBLE
